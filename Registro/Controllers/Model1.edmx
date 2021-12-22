@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RegistroModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="alm_alumno">
+          <Key>
+            <PropertyRef Name="alm_id" />
+          </Key>
+          <Property Name="alm_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="alm_codigo" Type="varchar" MaxLength="100" />
+          <Property Name="alm_nombre" Type="varchar" MaxLength="300" />
+          <Property Name="alm_edad" Type="int" />
+          <Property Name="alm_sexo" Type="varchar" MaxLength="100" />
+          <Property Name="alm_id_grd" Type="int" />
+          <Property Name="alm_descripcion" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="grd_grado">
+          <Key>
+            <PropertyRef Name="grd_id" />
+          </Key>
+          <Property Name="grd_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="grd_nombre" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="mat_materia">
+          <Key>
+            <PropertyRef Name="mat_id" />
+          </Key>
+          <Property Name="mat_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mat_nombre" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="mxg_materiaxgrado">
+          <Key>
+            <PropertyRef Name="mxg_id" />
+          </Key>
+          <Property Name="mxg_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mxg_id_grd" Type="int" />
+          <Property Name="mxg_id_mat" Type="int" />
+        </EntityType>
+        <Association Name="alm_A_grado">
+          <End Role="grd_grado" Type="Self.grd_grado" Multiplicity="0..1" />
+          <End Role="alm_alumno" Type="Self.alm_alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grd_grado">
+              <PropertyRef Name="grd_id" />
+            </Principal>
+            <Dependent Role="alm_alumno">
+              <PropertyRef Name="alm_id_grd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="mxg_A_grado">
+          <End Role="grd_grado" Type="Self.grd_grado" Multiplicity="0..1" />
+          <End Role="mxg_materiaxgrado" Type="Self.mxg_materiaxgrado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grd_grado">
+              <PropertyRef Name="grd_id" />
+            </Principal>
+            <Dependent Role="mxg_materiaxgrado">
+              <PropertyRef Name="mxg_id_grd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="mxg_A_materia">
+          <End Role="mat_materia" Type="Self.mat_materia" Multiplicity="0..1" />
+          <End Role="mxg_materiaxgrado" Type="Self.mxg_materiaxgrado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mat_materia">
+              <PropertyRef Name="mat_id" />
+            </Principal>
+            <Dependent Role="mxg_materiaxgrado">
+              <PropertyRef Name="mxg_id_mat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RegistroModelStoreContainer">
+          <EntitySet Name="alm_alumno" EntityType="Self.alm_alumno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="grd_grado" EntityType="Self.grd_grado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mat_materia" EntityType="Self.mat_materia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mxg_materiaxgrado" EntityType="Self.mxg_materiaxgrado" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="alm_A_grado" Association="Self.alm_A_grado">
+            <End Role="grd_grado" EntitySet="grd_grado" />
+            <End Role="alm_alumno" EntitySet="alm_alumno" />
+          </AssociationSet>
+          <AssociationSet Name="mxg_A_grado" Association="Self.mxg_A_grado">
+            <End Role="grd_grado" EntitySet="grd_grado" />
+            <End Role="mxg_materiaxgrado" EntitySet="mxg_materiaxgrado" />
+          </AssociationSet>
+          <AssociationSet Name="mxg_A_materia" Association="Self.mxg_A_materia">
+            <End Role="mat_materia" EntitySet="mat_materia" />
+            <End Role="mxg_materiaxgrado" EntitySet="mxg_materiaxgrado" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RegistroModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="alm_alumno">
+          <Key>
+            <PropertyRef Name="alm_id" />
+          </Key>
+          <Property Name="alm_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="alm_codigo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="alm_nombre" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="alm_edad" Type="Int32" />
+          <Property Name="alm_sexo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="alm_id_grd" Type="Int32" />
+          <Property Name="alm_descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="grd_grado" Relationship="Self.alm_A_grado" FromRole="alm_alumno" ToRole="grd_grado" />
+        </EntityType>
+        <EntityType Name="grd_grado">
+          <Key>
+            <PropertyRef Name="grd_id" />
+          </Key>
+          <Property Name="grd_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="grd_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="alm_alumno" Relationship="Self.alm_A_grado" FromRole="grd_grado" ToRole="alm_alumno" />
+          <NavigationProperty Name="mxg_materiaxgrado" Relationship="Self.mxg_A_grado" FromRole="grd_grado" ToRole="mxg_materiaxgrado" />
+        </EntityType>
+        <EntityType Name="mat_materia">
+          <Key>
+            <PropertyRef Name="mat_id" />
+          </Key>
+          <Property Name="mat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mat_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="mxg_materiaxgrado" Relationship="Self.mxg_A_materia" FromRole="mat_materia" ToRole="mxg_materiaxgrado" />
+        </EntityType>
+        <EntityType Name="mxg_materiaxgrado">
+          <Key>
+            <PropertyRef Name="mxg_id" />
+          </Key>
+          <Property Name="mxg_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mxg_id_grd" Type="Int32" />
+          <Property Name="mxg_id_mat" Type="Int32" />
+          <NavigationProperty Name="grd_grado" Relationship="Self.mxg_A_grado" FromRole="mxg_materiaxgrado" ToRole="grd_grado" />
+          <NavigationProperty Name="mat_materia" Relationship="Self.mxg_A_materia" FromRole="mxg_materiaxgrado" ToRole="mat_materia" />
+        </EntityType>
+        <Association Name="alm_A_grado">
+          <End Role="grd_grado" Type="Self.grd_grado" Multiplicity="0..1" />
+          <End Role="alm_alumno" Type="Self.alm_alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grd_grado">
+              <PropertyRef Name="grd_id" />
+            </Principal>
+            <Dependent Role="alm_alumno">
+              <PropertyRef Name="alm_id_grd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="mxg_A_grado">
+          <End Role="grd_grado" Type="Self.grd_grado" Multiplicity="0..1" />
+          <End Role="mxg_materiaxgrado" Type="Self.mxg_materiaxgrado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grd_grado">
+              <PropertyRef Name="grd_id" />
+            </Principal>
+            <Dependent Role="mxg_materiaxgrado">
+              <PropertyRef Name="mxg_id_grd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="mxg_A_materia">
+          <End Role="mat_materia" Type="Self.mat_materia" Multiplicity="0..1" />
+          <End Role="mxg_materiaxgrado" Type="Self.mxg_materiaxgrado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mat_materia">
+              <PropertyRef Name="mat_id" />
+            </Principal>
+            <Dependent Role="mxg_materiaxgrado">
+              <PropertyRef Name="mxg_id_mat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RegistroEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="alm_alumno" EntityType="Self.alm_alumno" />
+          <EntitySet Name="grd_grado" EntityType="Self.grd_grado" />
+          <EntitySet Name="mat_materia" EntityType="Self.mat_materia" />
+          <EntitySet Name="mxg_materiaxgrado" EntityType="Self.mxg_materiaxgrado" />
+          <AssociationSet Name="alm_A_grado" Association="Self.alm_A_grado">
+            <End Role="grd_grado" EntitySet="grd_grado" />
+            <End Role="alm_alumno" EntitySet="alm_alumno" />
+          </AssociationSet>
+          <AssociationSet Name="mxg_A_grado" Association="Self.mxg_A_grado">
+            <End Role="grd_grado" EntitySet="grd_grado" />
+            <End Role="mxg_materiaxgrado" EntitySet="mxg_materiaxgrado" />
+          </AssociationSet>
+          <AssociationSet Name="mxg_A_materia" Association="Self.mxg_A_materia">
+            <End Role="mat_materia" EntitySet="mat_materia" />
+            <End Role="mxg_materiaxgrado" EntitySet="mxg_materiaxgrado" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RegistroModelStoreContainer" CdmEntityContainer="RegistroEntities">
+          <EntitySetMapping Name="alm_alumno">
+            <EntityTypeMapping TypeName="RegistroModel.alm_alumno">
+              <MappingFragment StoreEntitySet="alm_alumno">
+                <ScalarProperty Name="alm_id" ColumnName="alm_id" />
+                <ScalarProperty Name="alm_codigo" ColumnName="alm_codigo" />
+                <ScalarProperty Name="alm_nombre" ColumnName="alm_nombre" />
+                <ScalarProperty Name="alm_edad" ColumnName="alm_edad" />
+                <ScalarProperty Name="alm_sexo" ColumnName="alm_sexo" />
+                <ScalarProperty Name="alm_id_grd" ColumnName="alm_id_grd" />
+                <ScalarProperty Name="alm_descripcion" ColumnName="alm_descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="grd_grado">
+            <EntityTypeMapping TypeName="RegistroModel.grd_grado">
+              <MappingFragment StoreEntitySet="grd_grado">
+                <ScalarProperty Name="grd_id" ColumnName="grd_id" />
+                <ScalarProperty Name="grd_nombre" ColumnName="grd_nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mat_materia">
+            <EntityTypeMapping TypeName="RegistroModel.mat_materia">
+              <MappingFragment StoreEntitySet="mat_materia">
+                <ScalarProperty Name="mat_id" ColumnName="mat_id" />
+                <ScalarProperty Name="mat_nombre" ColumnName="mat_nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mxg_materiaxgrado">
+            <EntityTypeMapping TypeName="RegistroModel.mxg_materiaxgrado">
+              <MappingFragment StoreEntitySet="mxg_materiaxgrado">
+                <ScalarProperty Name="mxg_id" ColumnName="mxg_id" />
+                <ScalarProperty Name="mxg_id_grd" ColumnName="mxg_id_grd" />
+                <ScalarProperty Name="mxg_id_mat" ColumnName="mxg_id_mat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,79 @@
+﻿@model Registro.Controllers.alm_alumno
+
+@{
+    ViewBag.Title = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Seguro que quiere Eliminar?</h3>
+<div>
+    <h4>Alumno</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.alm_codigo)-->
+            Codigo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.alm_codigo)
+            </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.alm_nombre)-->
+            Nombre
+        </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.alm_nombre)
+            </dd>
+
+            <dt>
+                <!--@Html.DisplayNameFor(model => model.alm_edad)-->
+                Edad
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.alm_edad)
+            </dd>
+
+            <dt>
+                <!--@Html.DisplayNameFor(model => model.alm_sexo)-->
+                Sexo
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.alm_sexo)
+            </dd>
+
+            <dt>
+                <!--@Html.DisplayNameFor(model => model.alm_descripcion)-->
+                Descripción
+            </dt>
+
+            <dd>
+               @Html.DisplayFor(model => model.alm_descripcion)
+            </dd>
+
+            <dt>
+                <!--@Html.DisplayNameFor(model => model.grd_grado.grd_nombre)-->
+                Grado
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.grd_grado.grd_nombre)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+                @Html.ActionLink("Back to List", "Index",null, htmlAttributes: new { @class = "btn btn-info" })
+            </div>
+        }
+    </div>

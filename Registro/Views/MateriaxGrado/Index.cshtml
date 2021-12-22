@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Registro.Controllers.mxg_materiaxgrado>
+
+@{
+    ViewBag.Title = "Registro de Materia por Grado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.grd_grado.grd_nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mat_materia.mat_nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.grd_grado.grd_nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mat_materia.mat_nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.mxg_id }, htmlAttributes: new { @class = "btn btn-primary" }) 
+            @Html.ActionLink("Details", "Details", new { id=item.mxg_id }, htmlAttributes: new { @class = "btn btn-info" })
+            @Html.ActionLink("Delete", "Delete", new { id=item.mxg_id }, htmlAttributes: new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

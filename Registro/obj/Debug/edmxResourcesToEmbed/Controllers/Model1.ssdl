@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RegistroModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="alm_alumno">
+    <Key>
+      <PropertyRef Name="alm_id" />
+    </Key>
+    <Property Name="alm_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="alm_codigo" Type="varchar" MaxLength="100" />
+    <Property Name="alm_nombre" Type="varchar" MaxLength="300" />
+    <Property Name="alm_edad" Type="int" />
+    <Property Name="alm_sexo" Type="varchar" MaxLength="100" />
+    <Property Name="alm_id_grd" Type="int" />
+    <Property Name="alm_descripcion" Type="varchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="grd_grado">
+    <Key>
+      <PropertyRef Name="grd_id" />
+    </Key>
+    <Property Name="grd_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="grd_nombre" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="mat_materia">
+    <Key>
+      <PropertyRef Name="mat_id" />
+    </Key>
+    <Property Name="mat_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mat_nombre" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="mxg_materiaxgrado">
+    <Key>
+      <PropertyRef Name="mxg_id" />
+    </Key>
+    <Property Name="mxg_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mxg_id_grd" Type="int" />
+    <Property Name="mxg_id_mat" Type="int" />
+  </EntityType>
+  <Association Name="alm_A_grado">
+    <End Role="grd_grado" Type="Self.grd_grado" Multiplicity="0..1" />
+    <End Role="alm_alumno" Type="Self.alm_alumno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="grd_grado">
+        <PropertyRef Name="grd_id" />
+      </Principal>
+      <Dependent Role="alm_alumno">
+        <PropertyRef Name="alm_id_grd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="mxg_A_grado">
+    <End Role="grd_grado" Type="Self.grd_grado" Multiplicity="0..1" />
+    <End Role="mxg_materiaxgrado" Type="Self.mxg_materiaxgrado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="grd_grado">
+        <PropertyRef Name="grd_id" />
+      </Principal>
+      <Dependent Role="mxg_materiaxgrado">
+        <PropertyRef Name="mxg_id_grd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="mxg_A_materia">
+    <End Role="mat_materia" Type="Self.mat_materia" Multiplicity="0..1" />
+    <End Role="mxg_materiaxgrado" Type="Self.mxg_materiaxgrado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mat_materia">
+        <PropertyRef Name="mat_id" />
+      </Principal>
+      <Dependent Role="mxg_materiaxgrado">
+        <PropertyRef Name="mxg_id_mat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RegistroModelStoreContainer">
+    <EntitySet Name="alm_alumno" EntityType="Self.alm_alumno" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="grd_grado" EntityType="Self.grd_grado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="mat_materia" EntityType="Self.mat_materia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="mxg_materiaxgrado" EntityType="Self.mxg_materiaxgrado" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="alm_A_grado" Association="Self.alm_A_grado">
+      <End Role="grd_grado" EntitySet="grd_grado" />
+      <End Role="alm_alumno" EntitySet="alm_alumno" />
+    </AssociationSet>
+    <AssociationSet Name="mxg_A_grado" Association="Self.mxg_A_grado">
+      <End Role="grd_grado" EntitySet="grd_grado" />
+      <End Role="mxg_materiaxgrado" EntitySet="mxg_materiaxgrado" />
+    </AssociationSet>
+    <AssociationSet Name="mxg_A_materia" Association="Self.mxg_A_materia">
+      <End Role="mat_materia" EntitySet="mat_materia" />
+      <End Role="mxg_materiaxgrado" EntitySet="mxg_materiaxgrado" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

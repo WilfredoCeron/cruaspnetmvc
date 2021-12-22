@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Registro.Controllers.alm_alumno>
+
+@{
+    ViewBag.Title = "Registro de Alumno";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+  
+@Html.ActionLink("Create New", "Create",null, htmlAttributes: new { @class = "btn btn-success" } )
+</p>
+<table class="table">
+    <tr >
+        <th>
+            <!--@Html.DisplayNameFor(model => model.alm_codigo)-->
+            Codigo
+        </th>
+        <th>
+            <!-- @Html.DisplayNameFor(model => model.alm_nombre)-->
+            Nombre
+        </th>
+        <th>
+            <!-- @Html.DisplayNameFor(model => model.alm_edad)-->
+            Edad
+        </th>
+        <th>
+            <!-- @Html.DisplayNameFor(model => model.alm_sexo)-->
+            Sexo
+        </th>
+        <th>
+            <!-- @Html.DisplayNameFor(model => model.alm_descripcion)-->
+            Descripción
+        </th>
+        <th>
+            <!-- @Html.DisplayNameFor(model => model.grd_grado.grd_nombre)-->
+            Grado
+        </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.alm_codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.alm_nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.alm_edad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.alm_sexo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.alm_descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.grd_grado.grd_nombre)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.alm_id }, htmlAttributes: new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Details", "Details", new { id = item.alm_id }, htmlAttributes: new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.alm_id }, htmlAttributes: new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>

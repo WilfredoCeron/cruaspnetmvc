@@ -1,0 +1,44 @@
+﻿@model Registro.Controllers.mxg_materiaxgrado
+
+@{
+    ViewBag.Title = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title </h2>
+
+<h3>Seguro que quiere Eliminar?</h3>
+<div>
+    <h4>Materia x Grado</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.grd_grado.grd_nombre)-->
+            Nombre de Grado
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.grd_grado.grd_nombre)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.mat_materia.mat_nombre)-->
+            Nombre de Materia
+        </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.mat_materia.mat_nombre)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-info" })
+            </div>
+        }
+    </div>

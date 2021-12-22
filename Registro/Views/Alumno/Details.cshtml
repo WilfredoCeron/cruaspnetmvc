@@ -1,0 +1,73 @@
+﻿@model Registro.Controllers.alm_alumno
+
+@{
+    ViewBag.Title = "Detalles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>Alumno</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.alm_codigo)-->
+            Codigo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.alm_codigo)
+        </dd>
+
+        <dt>
+            <!--@Html.DisplayNameFor(model => model.alm_nombre)-->
+            Nombre
+        </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.alm_nombre)
+            </dd>
+
+            <dt>
+                <!--@Html.DisplayNameFor(model => model.alm_edad)-->
+                Edad
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.alm_edad)
+            </dd>
+
+            <dt>
+                <!--@Html.DisplayNameFor(model => model.alm_sexo)-->
+                Sexo
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.alm_sexo)
+            </dd>
+
+            <dt>
+                <!--@Html.DisplayNameFor(model => model.alm_descripcion)-->
+                Descrición
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.alm_descripcion)
+            </dd>
+
+            <dt>
+                <!--@Html.DisplayNameFor(model => model.grd_grado.grd_nombre)-->
+                Grado
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.grd_grado.grd_nombre)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.alm_id },htmlAttributes: new { @class = "btn btn-primary" }) 
+        @Html.ActionLink("Back to List", "Index", null, htmlAttributes: new { @class = "btn btn-info" })
+    </p>

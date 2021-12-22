@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RegistroModelStoreContainer" CdmEntityContainer="RegistroEntities">
+    <EntitySetMapping Name="alm_alumno">
+      <EntityTypeMapping TypeName="RegistroModel.alm_alumno">
+        <MappingFragment StoreEntitySet="alm_alumno">
+          <ScalarProperty Name="alm_id" ColumnName="alm_id" />
+          <ScalarProperty Name="alm_codigo" ColumnName="alm_codigo" />
+          <ScalarProperty Name="alm_nombre" ColumnName="alm_nombre" />
+          <ScalarProperty Name="alm_edad" ColumnName="alm_edad" />
+          <ScalarProperty Name="alm_sexo" ColumnName="alm_sexo" />
+          <ScalarProperty Name="alm_id_grd" ColumnName="alm_id_grd" />
+          <ScalarProperty Name="alm_descripcion" ColumnName="alm_descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="grd_grado">
+      <EntityTypeMapping TypeName="RegistroModel.grd_grado">
+        <MappingFragment StoreEntitySet="grd_grado">
+          <ScalarProperty Name="grd_id" ColumnName="grd_id" />
+          <ScalarProperty Name="grd_nombre" ColumnName="grd_nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mat_materia">
+      <EntityTypeMapping TypeName="RegistroModel.mat_materia">
+        <MappingFragment StoreEntitySet="mat_materia">
+          <ScalarProperty Name="mat_id" ColumnName="mat_id" />
+          <ScalarProperty Name="mat_nombre" ColumnName="mat_nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mxg_materiaxgrado">
+      <EntityTypeMapping TypeName="RegistroModel.mxg_materiaxgrado">
+        <MappingFragment StoreEntitySet="mxg_materiaxgrado">
+          <ScalarProperty Name="mxg_id" ColumnName="mxg_id" />
+          <ScalarProperty Name="mxg_id_grd" ColumnName="mxg_id_grd" />
+          <ScalarProperty Name="mxg_id_mat" ColumnName="mxg_id_mat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
